@@ -18,4 +18,8 @@ class Team : AbstractClubRelatedEntity() {
     @OneToMany(mappedBy = "team")
     val players: List<Player> = ArrayList<Player>()
 
+    override fun toString(): String {
+        return "Team(id=$id, name=$name)"
+    }
+
 }

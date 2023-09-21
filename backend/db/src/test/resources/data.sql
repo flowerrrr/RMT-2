@@ -42,3 +42,8 @@ INSERT INTO event VALUES ('Match', 4, 'Jungs, hier wird die Richtung für die ko
 INSERT INTO event VALUES ('Event', 25, 'Bitte eintragen, damit ich besser planen kann.', true, 'Urlaubs- und Fehlzeitenplanung', NULL, 1, 5, 2, NULL, 0, NULL, NULL, 1, false, '2012-11-30 00:00:00', '2012-07-03 17:55:51', NULL, '2012-11-30 04:00:00');
 INSERT INTO event VALUES ('Training', 52, 'Wir sind gebucht jeden Sonntag bis Ende März!!', true, 'Soccer5 in Martinsried', '17:15:00', 1, 1, 1, NULL, 0, 'ARTIFICIAL_GRASS', NULL, 1, false, '2012-11-04 17:00:00', '2012-10-29 16:23:22', NULL, '2012-11-04 18:45:00');
 INSERT INTO event VALUES ('Training', 53, NULL, true, '3. Soccer5', '17:15:00', 1, 5, 1, NULL, 0, 'ARTIFICIAL_GRASS', NULL, 1, false, '2012-11-11 17:00:00', '2012-10-29 16:28:16', NULL, '2012-11-11 18:45:00');
+
+
+INSERT INTO player VALUES (12,true,false,false,5,1,0,NULL,NULL);
+INSERT INTO player VALUES (13,true,false,false,1,79,0,NULL,NULL);
+INSERT INTO player VALUES (14,true,false,false,1,80,0,NULL,NULL);

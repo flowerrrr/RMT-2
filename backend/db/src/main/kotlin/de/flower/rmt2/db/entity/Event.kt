@@ -66,4 +66,8 @@ class Event : AbstractClubRelatedEntity() {
 //     */
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    private val opponent: Opponent? = null
+
+    override fun toString(): String {
+        return "Event(id=$id, dateTime=$dateTime, summary=$summary)"
+    }
 }

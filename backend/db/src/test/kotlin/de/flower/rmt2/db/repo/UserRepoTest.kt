@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 
-class UserRepoTest  : AbstractRepoTest() {
+class UserRepoTest  : AbstractH2RepoTest() {
 
     @Autowired
     lateinit var userRepo: UserRepo

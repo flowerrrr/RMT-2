@@ -1,0 +1,1 @@
+Docker Container mit einer Mysql, die einen Dump aus dem Live-System enthält.

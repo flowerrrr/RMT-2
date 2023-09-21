@@ -111,6 +111,30 @@ CREATE INDEX ix_uniform_team ON uniform(team_id);
 CREATE INDEX ix_uniform_objectstatus ON uniform(objectStatus);
 CREATE INDEX ix_uniform_createDate ON uniform(createDate);
 
+CREATE TABLE player (
+  id BIGINT PRIMARY KEY NOT NULL,
+  notification BOOLEAN NOT NULL,
+  optional BOOLEAN NOT NULL,
+  retired BOOLEAN NOT NULL,
+  team_id BIGINT NOT NULL,
+  user_id BIGINT NOT NULL,
+  objectStatus INT DEFAULT NULL,
+  createDate DATETIME DEFAULT NULL,
+  updateDate DATETIME DEFAULT NULL,
+  FOREIGN KEY (team_id) REFERENCES team(id),
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+-- Indexes
+CREATE INDEX ix_player_retired ON player(retired);
+CREATE INDEX ix_player_notification ON player(notification);
+CREATE INDEX ix_player_user ON player(user_id);
+CREATE INDEX ix_player_team ON player(team_id);
+CREATE INDEX ix_player_optional ON player(optional);
+CREATE INDEX ix_player_objectstatus ON player(objectStatus);
+CREATE INDEX ix_player_createDate ON player(createDate);
+
+
 
 CREATE TABLE event (
   eventType VARCHAR(31) NOT NULL,

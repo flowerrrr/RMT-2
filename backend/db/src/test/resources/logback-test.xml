@@ -7,8 +7,7 @@
         </encoder>
     </appender>
 
-    <!-- Turn on DEBUG logging for Spring Boot -->
-    <logger name="org.springframework" level="DEBUG" additivity="false">
+    <logger name="org.springframework" level="INFO" additivity="false">
         <appender-ref ref="STDOUT" />
     </logger>
 
@@ -18,7 +17,7 @@
     </logger> -->
 
     <!-- Set the root logger level and attach the STDOUT appender -->
-    <root level="DEBUG">
+    <root level="INFO">
         <appender-ref ref="STDOUT" />
     </root>
 </configuration>

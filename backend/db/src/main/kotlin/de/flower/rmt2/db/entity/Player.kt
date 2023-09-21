@@ -1,5 +1,6 @@
 package de.flower.rmt2.db.entity
 
+import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.FetchType
 import jakarta.persistence.ManyToOne
@@ -15,6 +16,28 @@ class Player : AbstractBaseEntity() {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private var user: User? = null
+
+    /**
+     * If true, player is not required to respond to invitations.
+     */
+    @Column
+    private val optional: Boolean? = null
+
+    /**
+     * If false, the player does not receive email-invitations (but can still respond to an event).
+     */
+    @Column
+    private val notification: Boolean? = null
+
+    /**
+     * If true, the player will not be invited to any future events.
+     */
+    @Column
+    private val retired: Boolean? = null
+
+    override fun toString(): String {
+        return "Player(id=$id, optional=$optional, notification=$notification, retired=$retired)"
+    }
 
 }
 

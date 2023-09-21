@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 
-class ClubRepoTest : AbstractRepoTest() {
+class ClubRepoTest : AbstractH2RepoTest() {
 
     @Autowired
     lateinit var clubRepo: ClubRepo
