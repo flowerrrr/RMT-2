@@ -10,7 +10,7 @@ services:
       MYSQL_USER: rmt
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
-      - ./scripts:/docker-entrypoint-initdb.d # Assuming you have a sql-scripts folder in your directory
+      - ./mysql/scripts:/docker-entrypoint-initdb.d # Assuming you have a sql-scripts folder in your directory
     ports:
       - "3306:3306"
 

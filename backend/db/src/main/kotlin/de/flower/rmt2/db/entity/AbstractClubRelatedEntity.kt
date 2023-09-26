@@ -4,7 +4,6 @@ import jakarta.persistence.FetchType
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.MappedSuperclass
 
-
 @MappedSuperclass
 abstract class AbstractClubRelatedEntity : AbstractBaseEntity {
 

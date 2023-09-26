@@ -47,3 +47,6 @@ INSERT INTO event VALUES ('Training', 53, NULL, true, '3. Soccer5', '17:15:00', 
 INSERT INTO player VALUES (12,true,false,false,5,1,0,NULL,NULL);
 INSERT INTO player VALUES (13,true,false,false,1,79,0,NULL,NULL);
 INSERT INTO player VALUES (14,true,false,false,1,80,0,NULL,NULL);
+
+INSERT INTO invitation VALUES (1,'2012-05-07 17:04:45',NULL,true,'ACCEPTED',4,1,0,'2015-12-30 12:16:46',false,NULL,false,NULL,NULL,NULL);
+INSERT INTO invitation VALUES (2,'2012-05-07 17:04:45',NULL,true,'ACCEPTED',4,79,0,'2015-12-30 12:16:46',false,NULL,false,NULL,NULL,NULL);

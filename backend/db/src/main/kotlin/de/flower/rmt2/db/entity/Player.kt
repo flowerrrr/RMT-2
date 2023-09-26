@@ -15,25 +15,25 @@ class Player : AbstractBaseEntity() {
     var team: Team? = null
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private var user: User? = null
+    var user: User? = null
 
     /**
      * If true, player is not required to respond to invitations.
      */
     @Column
-    private val optional: Boolean? = null
+    var optional: Boolean? = null
 
     /**
      * If false, the player does not receive email-invitations (but can still respond to an event).
      */
     @Column
-    private val notification: Boolean? = null
+    var notification: Boolean? = null
 
     /**
      * If true, the player will not be invited to any future events.
      */
     @Column
-    private val retired: Boolean? = null
+    var retired: Boolean? = null
 
     override fun toString(): String {
         return "Player(id=$id, optional=$optional, notification=$notification, retired=$retired)"

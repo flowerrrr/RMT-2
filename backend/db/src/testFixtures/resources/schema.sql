@@ -171,3 +171,37 @@ CREATE INDEX ix_event_team ON event (team_id);
 CREATE INDEX ix_event_canceled ON event (canceled);
 CREATE INDEX ix_event_datetime ON event (dateTime);
 CREATE INDEX ix_event_createDate ON event (createDate);
+
+
+CREATE TABLE invitation (
+  id BIGINT PRIMARY KEY,
+  date TIMESTAMP,
+  guestName VARCHAR(50),
+  invitationSent BOOLEAN NOT NULL,
+  status VARCHAR(255) NOT NULL,
+  event_id BIGINT NOT NULL,
+  user_id BIGINT,
+  objectStatus INT,
+  invitationSentDate TIMESTAMP,
+  noResponseReminderSent BOOLEAN,
+  noResponseReminderSentDate TIMESTAMP,
+  unsureReminderSent BOOLEAN,
+  unsureReminderSentDate TIMESTAMP,
+  createDate TIMESTAMP,
+  updateDate TIMESTAMP,
+  FOREIGN KEY (event_id) REFERENCES event(id),
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE INDEX ix_invitation_event ON invitation(event_id);
+CREATE INDEX ix_invitation_user ON invitation(user_id);
+CREATE INDEX ix_invitation_status ON invitation(status);
+CREATE INDEX ix_invitation_invitationsent ON invitation(invitationSent);
+CREATE INDEX ix_invitation_objectstatus ON invitation(objectStatus);
+CREATE INDEX ix_invitation_date ON invitation(date);
+CREATE INDEX ix_invitation_noresponseremindersentdate ON invitation(noResponseReminderSentDate);
+CREATE INDEX ix_invitation_invitationsentdate ON invitation(invitationSentDate);
+CREATE INDEX ix_invitation_noresponseremindersent ON invitation(noResponseReminderSent);
+CREATE INDEX ix_invitation_unsureremindersentdate ON invitation(unsureReminderSentDate);
+CREATE INDEX ix_invitation_unsureremindersent ON invitation(unsureReminderSent);
+CREATE INDEX ix_invitation_createDate ON invitation(createDate);

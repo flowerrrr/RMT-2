@@ -1,4 +1,4 @@
-package de.flower.rmt2
+package de.flower.rmt2.rest
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class Rmt2Application
 
 fun main(args: Array<String>) {
-	runApplication<Rmt2Application>(*args)
+    runApplication<Rmt2Application>(*args)
 }

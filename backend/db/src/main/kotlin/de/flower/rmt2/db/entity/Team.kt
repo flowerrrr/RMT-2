@@ -10,10 +10,10 @@ import jakarta.persistence.Table
 class Team : AbstractClubRelatedEntity() {
 
     @Column
-    val name: String? = null
+    var name: String? = null
 
     @Column
-    val url: String? = null
+    var url: String? = null
 
     @OneToMany(mappedBy = "team")
     val players: List<Player> = ArrayList<Player>()

@@ -40,10 +40,6 @@ allprojects {
 	}
 
 }
-dependencies {
-	implementation("joda-time:joda-time:2.12.5")
-	implementation("joda-time:joda-time:2.12.5")
-}
 
 subprojects {
 
@@ -54,6 +50,7 @@ subprojects {
 		targetCompatibility = JavaVersion.VERSION_17
 	}
 }
+
 
 
 

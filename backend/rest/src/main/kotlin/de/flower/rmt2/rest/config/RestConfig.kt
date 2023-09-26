@@ -7,13 +7,13 @@ import org.springframework.context.annotation.Import
 
 @Configuration
 @ComponentScan(
-        basePackages = ["de.flower.rmt2.rest.service"],
-        // avoid picking up @Configuration classes inside test classes
-        excludeFilters = [ComponentScan.Filter(Configuration::class)]
+    basePackages = ["de.flower.rmt2.rest.error", "de.flower.rmt2.rest.service"],
+    // avoid picking up @Configuration classes inside test classes
+    excludeFilters = [ComponentScan.Filter(Configuration::class)]
 )
 @Import(
-        CoreConfig::class
-        //        DbConfig::class
+    CoreConfig::class,
+    SecurityConfig::class
 )
 class RestConfig {
 }
