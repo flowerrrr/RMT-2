@@ -1,3 +1,5 @@
+import org.springframework.boot.gradle.tasks.bundling.BootJar
+
 plugins {
     id("org.springframework.boot") version "3.1.3"
     id("io.spring.dependency-management") version "1.1.3"
@@ -30,7 +32,9 @@ tasks.getByName<Jar>("jar") {
     archiveBaseName.set(baseName)
 }
 
-tasks.getByName<Jar>("bootJar") {
+tasks.getByName<BootJar>("bootJar") {
     val baseName = "das-tool-rest"
     archiveBaseName.set(baseName)
+    launchScript()
 }
+
