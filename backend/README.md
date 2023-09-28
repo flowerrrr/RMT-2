@@ -31,6 +31,18 @@ s. https://docs.spring.io/spring-boot/docs/current/reference/html/deployment.htm
 * /var/log/das-tool-rest.log (wird von systemd geschrieben)
 * /var/log/das-tool-rest/das-tool-rest.log (application log, konfiguriert in logback.xml)
 
+### Monitoring
+
+- https://uptimerobot.com
+
+  HTTP-Monitoring von https://flower.de:8453/das-tool-rest/index.html
+
+- Host panel bei hosteurope
+
+  Generelle Serverüberwachung
+
+- Log-Files s. oben
+
 ## Firewall
 
 s. Readme.Md im Projekt 'rmt.'
