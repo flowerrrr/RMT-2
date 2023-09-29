@@ -1,5 +1,6 @@
 package de.flower.rmt2.db.entity
 
+import de.flower.rmt2.db.entity.event.Event
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
 import jakarta.persistence.Enumerated

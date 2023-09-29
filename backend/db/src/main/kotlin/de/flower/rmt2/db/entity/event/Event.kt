@@ -1,5 +1,9 @@
-package de.flower.rmt2.db.entity
+package de.flower.rmt2.db.entity.event
 
+import de.flower.rmt2.db.entity.AbstractClubRelatedEntity
+import de.flower.rmt2.db.entity.Invitation
+import de.flower.rmt2.db.entity.Team
+import de.flower.rmt2.db.entity.Venue
 import jakarta.persistence.Column
 import jakarta.persistence.DiscriminatorColumn
 import jakarta.persistence.DiscriminatorType
@@ -18,7 +22,7 @@ import java.time.LocalDateTime
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "eventType", discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue("Event")
-class Event : AbstractBaseEntity() {
+class Event : AbstractClubRelatedEntity() {
 
     @ManyToOne(fetch = FetchType.LAZY)
     var team: Team? = null
@@ -60,12 +64,9 @@ class Event : AbstractBaseEntity() {
     @OneToMany(mappedBy = "event", fetch = FetchType.LAZY)
     val invitations: List<Invitation> = ArrayList<Invitation>()
 
-//    /**
-//     * Defined here to be able to eager fetch this association with query dsl.
-//     * Can be null. Sometimes events are created without knowing who the opponent will be.
-//     */
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    var opponent: Opponent? = null
+    fun getEventType(): EventType {
+        return EventType.from(this)
+    }
 
     override fun toString(): String {
         return "Event(id=$id, dateTime=$dateTime, summary=$summary)"
