@@ -41,3 +41,4 @@ out/
 /dependencies.txt
 /rest/src/main/resources/keystore.p12
 /rest/src/main/resources/secrets.properties
+/rest/src/test/resources/secrets-test.properties
