@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Import
 
 @Configuration
 @ComponentScan(
-    basePackages = ["de.flower.rmt2.rest.error"],
+    basePackages = ["de.flower.rmt2.rest.error", "de.flower.rmt2.rest.jwt"],
     // avoid picking up @Configuration classes inside test classes
     excludeFilters = [ComponentScan.Filter(Configuration::class)]
 )
