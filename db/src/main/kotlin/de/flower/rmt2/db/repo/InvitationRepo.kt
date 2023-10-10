@@ -8,4 +8,8 @@ interface InvitationRepo : JpaRepository<Invitation, Long> {
 
     @EntityGraph(attributePaths = ["event"], type = EntityGraph.EntityGraphType.LOAD) // eager load the event
     fun findTop20ByUserEmailOrderByEventDateTimeDesc(email: String): List<Invitation>
+
+    fun findByEventIdAndUserEmail(eventId: Long, username: String): Invitation?
+
+    fun findByEventIdOrderByStatus(eventId: Long): List<Invitation>
 }

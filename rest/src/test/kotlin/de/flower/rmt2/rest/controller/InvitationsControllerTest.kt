@@ -111,4 +111,25 @@ class InvitationsControllerTest(
             .andExpect(content().string("{\"status\":\"must not be null\"}"))
             .andReturn()
     }
+
+    @Test
+    @WithMockUser(username = "oliver.blume@yahoo.de")
+    fun invitationsByEvent() {
+        val mvcResult = mockMvc.perform(get("/event/4/invitations"))
+            .andDo(print())
+            .andExpect(status().isOk())
+            .andReturn()
+        val type = objectMapper.typeFactory.constructCollectionType(List::class.java, InvitationDTO::class.java)
+        val invitationDTOs: List<InvitationDTO> = objectMapper.readValue(mvcResult.response.contentAsString, type)
+        Assertions.assertThat(invitationDTOs).hasSize(4)
+    }
+
+    @Test
+    @WithMockUser(username = "oliver.blume@yahoo.de")
+    fun invitationsByEvent_notFound() {
+        val mvcResult = mockMvc.perform(get("/event/5/invitations"))
+            .andDo(print())
+            .andExpect(status().isNotFound)
+            .andReturn()
+    }
 }

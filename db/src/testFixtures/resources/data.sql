@@ -78,8 +78,8 @@ VALUES (8, 0, 'Old school', 'rot', 'rot', 'rot', 4, '2014-11-16 20:30:30', NULL)
 
 INSERT INTO event
 VALUES ('Match', 4, 'Jungs, hier wird die Richtung für die kommende Saision festgelegt. Also haut rein!', true,
-        'Saisonopening', '14:30:00', 2, 5, 3, 1, 0, 'NATURAL_GRASS', NULL, 1, false, '2012-08-18 14:45:00', NULL, NULL,
-        '2012-08-18 17:15:00');
+        'Saisonopening', '14:30:00', 2, 5, 3, 1, 0, 'NATURAL_GRASS', NULL, 1, false, '2032-08-18 14:45:00', NULL, NULL,
+        '2032-08-18 17:15:00');
 INSERT INTO event
 VALUES ('Event', 25, 'Bitte eintragen, damit ich besser planen kann.', true, 'Urlaubs- und Fehlzeitenplanung', NULL, 1,
         5, 2, NULL, 0, NULL, NULL, 1, false, '2012-11-30 00:00:00', '2012-07-03 17:55:51', NULL, '2012-11-30 04:00:00');
@@ -98,10 +98,18 @@ INSERT INTO player
 VALUES (13, true, false, false, 1, 79, 0, NULL, NULL);
 INSERT INTO player
 VALUES (14, true, false, false, 1, 80, 0, NULL, NULL);
+INSERT INTO player
+VALUES (15, true, false, false, 1, 81, 0, NULL, NULL);
 
 INSERT INTO invitation
 VALUES (1, '2012-05-07 17:04:45', NULL, true, 'ACCEPTED', 4, 1, 0, '2015-12-30 12:16:46', false, NULL, false, NULL,
         NULL, NULL);
 INSERT INTO invitation
 VALUES (2, '2012-05-07 17:04:45', NULL, true, 'ACCEPTED', 4, 79, 0, '2015-12-30 12:16:46', false, NULL, false, NULL,
+        NULL, NULL);
+INSERT INTO invitation
+VALUES (3, '2012-05-07 17:04:45', NULL, true, 'DECLINED', 4, 80, 0, '2015-12-30 12:16:46', false, NULL, false, NULL,
+        NULL, NULL);
+INSERT INTO invitation
+VALUES (4, '2012-05-07 17:04:45', NULL, true, 'NORESPONSE', 4, 81, 0, '2015-12-30 12:16:46', false, NULL, false, NULL,
         NULL, NULL);
