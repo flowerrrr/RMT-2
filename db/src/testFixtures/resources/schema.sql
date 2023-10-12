@@ -1,5 +1,15 @@
 -- File is imported by Spring Boot on startup
 
+DROP TABLE IF EXISTS invitation;
+DROP TABLE IF EXISTS event;
+DROP TABLE IF EXISTS player;
+DROP TABLE IF EXISTS uniform;
+DROP TABLE IF EXISTS opponent;
+DROP TABLE IF EXISTS venue;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS team;
+DROP TABLE IF EXISTS club;
+
 CREATE TABLE club
 (
     id           bigint NOT NULL AUTO_INCREMENT,

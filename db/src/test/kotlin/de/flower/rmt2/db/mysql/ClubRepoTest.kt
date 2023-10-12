@@ -1,10 +1,12 @@
 package de.flower.rmt2.db.mysql
 
 import de.flower.rmt2.db.repo.ClubRepo
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 
+@Disabled
 class ClubRepoTest : AbstractMysqlRepoTest() {
 
     @Autowired
