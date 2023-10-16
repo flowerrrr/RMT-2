@@ -24,7 +24,7 @@ class InvitationController(val invitationService: InvitationService) {
         return invitationService.updateInvitation(invitation)
     }
 
-    @GetMapping(path = ["/event/{id}/invitations"], produces = [MediaType.APPLICATION_JSON_VALUE])
+    @GetMapping(path = ["/events/{id}/invitations"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun invitationsByEvent(@PathVariable id: Long): List<InvitationDTO> {
         return invitationService.invitationsByEvent(id)
     }

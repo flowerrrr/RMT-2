@@ -115,7 +115,7 @@ class InvitationsControllerTest(
     @Test
     @WithMockUser(username = "oliver.blume@yahoo.de")
     fun invitationsByEvent() {
-        val mvcResult = mockMvc.perform(get("/event/4/invitations"))
+        val mvcResult = mockMvc.perform(get("/events/4/invitations"))
             .andDo(print())
             .andExpect(status().isOk())
             .andReturn()
@@ -127,7 +127,7 @@ class InvitationsControllerTest(
     @Test
     @WithMockUser(username = "oliver.blume@yahoo.de")
     fun invitationsByEvent_notFound() {
-        val mvcResult = mockMvc.perform(get("/event/5/invitations"))
+        val mvcResult = mockMvc.perform(get("/events/5/invitations"))
             .andDo(print())
             .andExpect(status().isNotFound)
             .andReturn()

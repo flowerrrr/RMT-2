@@ -6,13 +6,15 @@ import de.flower.rmt2.db.entity.RSVPStatus
 data class InvitationDTO(
     val id: Long?,
     val status: RSVPStatus?,
-    val event: EventDTO? = null
+    val event: EventDTO? = null,
+    val user: UserDTO? = null
 )
 
 fun fromEntity(invitation: Invitation): InvitationDTO {
     return InvitationDTO(
         id = invitation.id!!,
         status = invitation.status!!,
-        event = invitation.event?.let { fromEntity(it) }
+        event = invitation.event?.let { fromEntity(it) },
+        user = invitation.user?.let { fromEntity(it) }
     )
 }

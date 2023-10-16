@@ -34,6 +34,7 @@ class SecurityConfig {
                 authorize("/favicon.ico", permitAll)
                 authorize("/index.html", permitAll)
                 authorize("/login", permitAll)
+                authorize("/error", permitAll)
                 authorize(anyRequest, authenticated)
             }
             sessionManagement { sessionCreationPolicy = SessionCreationPolicy.STATELESS }
