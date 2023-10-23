@@ -3,7 +3,6 @@ package de.flower.rmt2.core.service
 import de.flower.rmt2.core.dto.InvitationDTO
 import de.flower.rmt2.core.dto.UpdateInvitationDTO
 import de.flower.rmt2.core.dto.fromEntity
-import de.flower.rmt2.db.entity.Invitation
 import de.flower.rmt2.db.entity.event.Event
 import de.flower.rmt2.db.repo.InvitationRepo
 import org.springframework.data.repository.findByIdOrNull
@@ -49,7 +48,7 @@ class InvitationService(
         if (invitation == null) {
             throw ResourceNotFoundException("Invitation with event id $eventId not found for user $username.")
         } else {
-            return invitationRepo.findByEventIdOrderByStatus(eventId)
+            return invitationRepo.findByEventIdOrderByStatusAscDateAsc(eventId)
                 .map { fromEntity(it) }
         }
 

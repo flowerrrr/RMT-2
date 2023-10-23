@@ -12,5 +12,5 @@ interface InvitationRepo : JpaRepository<Invitation, Long> {
     fun findByEventIdAndUserEmail(eventId: Long, username: String): Invitation?
 
     @EntityGraph(attributePaths = ["event", "user"], type = EntityGraph.EntityGraphType.LOAD) // eager load the event and user
-    fun findByEventIdOrderByStatus(eventId: Long): List<Invitation>
+    fun findByEventIdOrderByStatusAscDateAsc(eventId: Long): List<Invitation>
 }

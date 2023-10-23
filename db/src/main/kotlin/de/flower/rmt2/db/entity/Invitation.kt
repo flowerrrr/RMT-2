@@ -31,4 +31,6 @@ class Invitation : AbstractBaseEntity() {
     @ManyToOne(fetch = FetchType.LAZY)
     var user: User? = null
 
+    var guestName: String? = null
+
 }

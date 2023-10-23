@@ -113,3 +113,6 @@ VALUES (3, '2012-05-07 17:04:45', NULL, true, 'DECLINED', 4, 80, 0, '2015-12-30 
 INSERT INTO invitation
 VALUES (4, '2012-05-07 17:04:45', NULL, true, 'NORESPONSE', 4, 81, 0, '2015-12-30 12:16:46', false, NULL, false, NULL,
         NULL, NULL);
+INSERT INTO invitation
+VALUES (5, '2012-05-07 17:04:45', 'Gast-Spieler', true, 'NORESPONSE', 4, NULL, 0, '2015-12-30 12:16:46', false, NULL, false, NULL,
+        NULL, NULL);

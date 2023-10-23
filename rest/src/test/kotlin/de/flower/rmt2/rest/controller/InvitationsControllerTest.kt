@@ -121,7 +121,7 @@ class InvitationsControllerTest(
             .andReturn()
         val type = objectMapper.typeFactory.constructCollectionType(List::class.java, InvitationDTO::class.java)
         val invitationDTOs: List<InvitationDTO> = objectMapper.readValue(mvcResult.response.contentAsString, type)
-        Assertions.assertThat(invitationDTOs).hasSize(4)
+        Assertions.assertThat(invitationDTOs).hasSize(5)
     }
 
     @Test

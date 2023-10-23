@@ -15,6 +15,6 @@ fun fromEntity(invitation: Invitation): InvitationDTO {
         id = invitation.id!!,
         status = invitation.status!!,
         event = invitation.event?.let { fromEntity(it) },
-        user = invitation.user?.let { fromEntity(it) }
+        user = invitation.user?.let { fromEntity(it) } ?: UserDTO(invitation.guestName)
     )
 }
