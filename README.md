@@ -73,3 +73,7 @@ Insgesamt ist die Testabdeckung noch sehr gering.
 ## Integration testing
 
 Die App kann mit einer MySQL, die in Docker läuft, getestet werden.
+
+## Issue Tracking
+
+https://flowerrrr.atlassian.net
