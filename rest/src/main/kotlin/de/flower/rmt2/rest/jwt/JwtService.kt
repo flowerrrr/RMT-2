@@ -27,10 +27,11 @@ class JwtService {
 
         val userPrincipal: UserDetails = authentication.getPrincipal() as UserDetails;
 
+        val oneYear = 1000L * 60 * 60 * 24 * 365 // 1 year in milliseconds
         return Jwts.builder()
             .setSubject((userPrincipal.getUsername()))
             .setIssuedAt(Date())
-            .setExpiration(Date((Date()).getTime() + 1000 * 60 * 60 * 24 * 365))
+            .setExpiration(Date((Date()).getTime() + 5 * oneYear))
             .signWith(key(), SignatureAlgorithm.HS256)
             .compact();
     }
