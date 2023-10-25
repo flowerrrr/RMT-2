@@ -19,11 +19,6 @@ class InvitationsController(val invitationService: InvitationService) {
         return invitationService.invitationsByCurrentUser()
     }
 
-    @GetMapping(path = ["/invitations/{id}"], produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun invitation(@PathVariable id: Long): InvitationDTO {
-        return invitationService.invitation(id)
-    }
-
     @PostMapping(path = ["/invitations"], consumes = [MediaType.APPLICATION_JSON_VALUE], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun updateInvitation(@Valid @RequestBody invitation: UpdateInvitationDTO): InvitationDTO {
         return invitationService.updateInvitation(invitation)
@@ -34,4 +29,11 @@ class InvitationsController(val invitationService: InvitationService) {
         return invitationService.invitationsByEvent(id)
     }
 
+    /**
+     * Returns the invitation of the current user for the given event.
+     */
+    @GetMapping(path = ["/events/{id}/invitation"], produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun invitationByEvent(@PathVariable id: Long): InvitationDTO {
+        return invitationService.invitationByEvent(id)
+    }
 }

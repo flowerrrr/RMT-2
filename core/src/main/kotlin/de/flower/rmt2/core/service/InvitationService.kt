@@ -43,6 +43,7 @@ class InvitationService(
 
     fun invitationsByEvent(eventId: Long): List<InvitationDTO> {
         // check if user has permission to see invitations for this event
+        // wenn keine Einladung zu einem Event vorhanden, darf der User den Event nicht sehen
         val username = getUsername()
         val invitation = invitationRepo.findByEventIdAndUserEmail(eventId, username)
         if (invitation == null) {
@@ -54,12 +55,11 @@ class InvitationService(
 
     }
 
-    fun invitation(id: Long): InvitationDTO {
-        // check if user has permission to see invitation
+    fun invitationByEvent(eventId: Long): InvitationDTO {
         val username = getUsername()
-        val invitation = invitationRepo.findByIdAndUserEmail(id, username)
+        val invitation = invitationRepo.findByEventIdAndUserEmail(eventId, username)
         if (invitation == null) {
-            throw ResourceNotFoundException("Invitation with id $id not found for user $username.")
+            throw ResourceNotFoundException("Invitation for event $eventId not found for user $username.")
         } else {
             return fromEntity(invitation)
         }
