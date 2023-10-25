@@ -54,4 +54,15 @@ class InvitationService(
 
     }
 
+    fun invitation(id: Long): InvitationDTO {
+        // check if user has permission to see invitation
+        val username = getUsername()
+        val invitation = invitationRepo.findByIdAndUserEmail(id, username)
+        if (invitation == null) {
+            throw ResourceNotFoundException("Invitation with id $id not found for user $username.")
+        } else {
+            return fromEntity(invitation)
+        }
+    }
+
 }

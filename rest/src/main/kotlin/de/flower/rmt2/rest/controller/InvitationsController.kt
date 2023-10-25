@@ -12,11 +12,16 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class InvitationController(val invitationService: InvitationService) {
+class InvitationsController(val invitationService: InvitationService) {
 
     @GetMapping(path = ["/invitations"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun invitationsByCurrentUser(): List<InvitationDTO> {
         return invitationService.invitationsByCurrentUser()
+    }
+
+    @GetMapping(path = ["/invitations/{id}"], produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun invitation(@PathVariable id: Long): InvitationDTO {
+        return invitationService.invitation(id)
     }
 
     @PostMapping(path = ["/invitations"], consumes = [MediaType.APPLICATION_JSON_VALUE], produces = [MediaType.APPLICATION_JSON_VALUE])

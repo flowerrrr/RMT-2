@@ -132,4 +132,25 @@ class InvitationsControllerTest(
             .andExpect(status().isNotFound)
             .andReturn()
     }
+
+    @Test
+    @WithMockUser(username = "oliver.blume@yahoo.de")
+    fun invitation() {
+        val mvcResult = mockMvc.perform(get("/invitations/1"))
+            .andDo(print())
+            .andExpect(status().isOk)
+            .andReturn()
+        val invitationDTO = objectMapper.readValue(mvcResult.response.contentAsString, InvitationDTO::class.java)
+        Assertions.assertThat(invitationDTO).isNotNull()
+    }
+
+    @Test
+    @WithMockUser(username = "someone.else@yahoo.de")
+    fun `get invitation with wrong user returns 404`() {
+        val mvcResult = mockMvc.perform(get("/invitations/1"))
+            .andDo(print())
+            .andExpect(status().isNotFound)
+            .andExpect(content().string("Invitation with id 1 not found for user someone.else@yahoo.de."))
+            .andReturn()
+    }
 }
