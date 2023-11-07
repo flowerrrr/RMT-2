@@ -14,7 +14,7 @@ Projekt wurde begonnen, um Erfahrungen mit Kotlin zu sammeln.
 
 * gradle assemble
 * das-tool-rest.jar nach flower.de:/home/oblume/das-tool-rest kopieren.
-* chmod a+x das-tool-rest.jar
+* chmod a+rx das-tool-rest.jar
 
 ### Install app as a service
 
@@ -26,6 +26,19 @@ s. https://docs.spring.io/spring-boot/docs/current/reference/html/deployment.htm
 * systemctl start das-tool-rest
 * systemctl enable das-tool-rest.service
 
+
+#### Running behind Apache
+
+  a2enmod proxy
+  a2enmod proxy_http
+
+- Reverse-Proxy-Config: /etc/apache2/sites-available/ flower.de-le-ssl.conf
+
+  # Proxy configuration for /das-tool-rest path
+  ProxyPass "/das-tool-rest" "http://localhost:8090/das-tool-rest"
+  ProxyPassReverse "/das-tool-rest" "http://localhost:8090/das-tool-rest"
+
+
 ### Logging
 
 * /var/log/das-tool-rest.log (wird von systemd geschrieben)
@@ -35,7 +48,7 @@ s. https://docs.spring.io/spring-boot/docs/current/reference/html/deployment.htm
 
 - https://uptimerobot.com
 
-  HTTP-Monitoring von https://flower.de:8453/das-tool-rest/index.html
+  HTTP-Monitoring von https://flower.de/das-tool-rest/index.html
 
 - Host panel bei hosteurope
 
@@ -49,20 +62,8 @@ s. Readme.Md im Projekt 'rmt.'
 
 ## SSL-Certificate
 
-Basierend auf dem Zertifikat des tomcat generiert.
-s. https://dzone.com/articles/spring-boot-secured-by-lets-encrypt
+Wird von Apache bereitgestellt.
 
-* cd /etc/letsencrypt/live/flower.de/
-* openssl pkcs12 -export -in fullchain.pem -inkey privkey.pem -out keystore.p12 -name flower -CAfile chain.pem -caname
-  root
-  Passwort wie im tomcat-Connector in server.xml
-* keystore.p12 nach /rest/src/main/resources kopieren.
-
-Keystore muss nach 3 Monaten manuell erneuert werden, falls die Clients nicht mit abgelaufenen Zertifikaten umgehen
-können.
-Automatisierung wäre möglich, indem man den Export monatlich durchführt, den so generierten Keystore in
-application.properties einträgt
-und dann die Anwendung neu startet.
 
 ## Testing
 
