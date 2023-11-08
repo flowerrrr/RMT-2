@@ -1,5 +1,7 @@
 -- File is imported by Spring Boot on startup
 
+
+DROP TABLE IF EXISTS comment;
 DROP TABLE IF EXISTS invitation;
 DROP TABLE IF EXISTS event;
 DROP TABLE IF EXISTS player;
@@ -15,8 +17,8 @@ CREATE TABLE club
     id           bigint NOT NULL AUTO_INCREMENT,
     name         varchar(255) DEFAULT NULL,
     objectStatus int          DEFAULT NULL,
-    lat double DEFAULT NULL,
-    lng double DEFAULT NULL,
+    lat          double       DEFAULT NULL,
+    lng          double       DEFAULT NULL,
     createDate   datetime     DEFAULT NULL,
     updateDate   datetime     DEFAULT NULL,
     PRIMARY KEY (id)
@@ -224,3 +226,23 @@ CREATE INDEX ix_invitation_noresponseremindersent ON invitation (noResponseRemin
 CREATE INDEX ix_invitation_unsureremindersentdate ON invitation (unsureReminderSentDate);
 CREATE INDEX ix_invitation_unsureremindersent ON invitation (unsureReminderSent);
 CREATE INDEX ix_invitation_createDate ON invitation (createDate);
+
+
+CREATE TABLE comment
+(
+    id            BIGINT PRIMARY KEY,
+    createDate    TIMESTAMP,
+    objectStatus  INT,
+    updateDate    TIMESTAMP,
+    text          VARCHAR(255),
+    author_id     BIGINT NOT NULL,
+    invitation_id BIGINT NOT NULL,
+    FOREIGN KEY (invitation_id) REFERENCES invitation (id),
+    FOREIGN KEY (author_id) REFERENCES users (id)
+);
+
+CREATE INDEX ix_author ON comment (author_id);
+CREATE INDEX ix_createDate ON comment (createDate);
+CREATE INDEX ix_invitation ON comment (invitation_id);
+CREATE INDEX ix_comment_objectstatus ON comment (objectStatus);
+

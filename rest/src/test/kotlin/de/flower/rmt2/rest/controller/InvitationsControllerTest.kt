@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import de.flower.rmt2.core.dto.InvitationDTO
 import de.flower.rmt2.core.dto.UpdateInvitationDTO
 import de.flower.rmt2.db.entity.RSVPStatus
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
@@ -38,7 +38,12 @@ class InvitationsControllerTest(
             .andReturn()
         val type = objectMapper.typeFactory.constructCollectionType(List::class.java, InvitationDTO::class.java)
         val invitationDTOs: List<InvitationDTO> = objectMapper.readValue(mvcResult.response.contentAsString, type)
-        Assertions.assertThat(invitationDTOs).hasSize(1)
+        assertThat(invitationDTOs).hasSize(1)
+        val invitationDTO = invitationDTOs[0]
+        assertThat(invitationDTO.comments).hasSize(2)
+        val comment = invitationDTO.comments[0]
+        assertThat(comment.author.username).isNotNull()
+        assertThat(comment.author.fullname).isNotNull()
     }
 
     @Test
@@ -53,7 +58,7 @@ class InvitationsControllerTest(
             .andExpect(status().isOk())
             .andReturn()
         val invitationDTO = objectMapper.readValue(mvcResult.response.contentAsString, InvitationDTO::class.java)
-        Assertions.assertThat(invitationDTO).isNotNull()
+        assertThat(invitationDTO).isNotNull()
     }
 
     @Test
@@ -121,7 +126,7 @@ class InvitationsControllerTest(
             .andReturn()
         val type = objectMapper.typeFactory.constructCollectionType(List::class.java, InvitationDTO::class.java)
         val invitationDTOs: List<InvitationDTO> = objectMapper.readValue(mvcResult.response.contentAsString, type)
-        Assertions.assertThat(invitationDTOs).hasSize(5)
+        assertThat(invitationDTOs).hasSize(5)
     }
 
     @Test
@@ -141,7 +146,7 @@ class InvitationsControllerTest(
             .andExpect(status().isOk)
             .andReturn()
         val invitationDTO = objectMapper.readValue(mvcResult.response.contentAsString, InvitationDTO::class.java)
-        Assertions.assertThat(invitationDTO).isNotNull()
+        assertThat(invitationDTO).isNotNull()
     }
 
     @Test
