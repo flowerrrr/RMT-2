@@ -195,7 +195,7 @@ CREATE INDEX ix_event_createDate ON event (createDate);
 
 CREATE TABLE invitation
 (
-    id                         BIGINT PRIMARY KEY,
+    id                         BIGINT AUTO_INCREMENT PRIMARY KEY,
     date                       TIMESTAMP,
     guestName                  VARCHAR(50),
     invitationSent             BOOLEAN      NOT NULL,
@@ -230,7 +230,7 @@ CREATE INDEX ix_invitation_createDate ON invitation (createDate);
 
 CREATE TABLE comment
 (
-    id            BIGINT PRIMARY KEY,
+    id            BIGINT AUTO_INCREMENT PRIMARY KEY,
     createDate    TIMESTAMP,
     objectStatus  INT,
     updateDate    TIMESTAMP,
@@ -246,3 +246,5 @@ CREATE INDEX ix_createDate ON comment (createDate);
 CREATE INDEX ix_invitation ON comment (invitation_id);
 CREATE INDEX ix_comment_objectstatus ON comment (objectStatus);
 
+-- damit neue Ids nicht mit Testdatensätzen aus data.sql kollidieren
+ALTER TABLE comment ALTER COLUMN id RESTART WITH 1000;

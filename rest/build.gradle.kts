@@ -11,6 +11,7 @@ plugins {
 dependencies {
     implementation(project(":core"))
     implementation(project(":db"))
+    implementation("org.apache.commons:commons-lang3")
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-web")

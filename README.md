@@ -6,6 +6,7 @@ Projekt wurde begonnen, um Erfahrungen mit Kotlin zu sammeln.
 
 ## Deployment
 
+
 ### Install JDK
 
 * JDK 21 installieren und JAVA_HOME_21 setzen.
@@ -15,6 +16,9 @@ Projekt wurde begonnen, um Erfahrungen mit Kotlin zu sammeln.
 * gradle assemble
 * das-tool-rest.jar nach flower.de:/home/oblume/das-tool-rest kopieren.
 * chmod a+rx das-tool-rest.jar
+* sudo systemctl restart das-tool-rest
+* sudo less /var/log/das-tool-rest/das-tool-rest.log
+
 
 ### Install app as a service
 

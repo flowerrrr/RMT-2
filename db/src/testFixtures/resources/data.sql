@@ -26,7 +26,7 @@ INSERT INTO users
 VALUES (80, 'martinez@mailinator.com', true, '15bdfe51b4c5a1c24f681e4891b8c29b', 'Martinez', 'vkxr', NULL, 'FIT', 1, 0,
         NULL, NULL, '2012-08-30 14:13:21', NULL, NULL);
 INSERT INTO users
-VALUES (81, 'gustavo@mailinator.com', true, '60494b575e52e98f260d3e559f7899ef', 'Gustavo', 'kb9q', NULL, 'FIT', 1, 0,
+VALUES (81, 'testuser@mailinator.com', true, '60494b575e52e98f260d3e559f7899ef', 'Gustavo', 'kb9q', NULL, 'FIT', 1, 0,
         NULL, NULL, '2012-08-30 14:13:36', NULL, NULL);
 INSERT INTO users
 VALUES (82, 'robben@mailinator.com', true, 'ead7272c4b8d1f431894f3735f2d6ada', 'Robben', '2h24', NULL, 'FIT', 1, 0,
@@ -120,3 +120,4 @@ VALUES (5, '2012-05-07 17:04:45', 'Gast-Spieler', true, 'NORESPONSE', 4, NULL, 0
 INSERT INTO comment VALUES (1, '2012-05-07 17:04:45', NULL, NULL, 'comment #1', 1, 1);
 INSERT INTO comment VALUES (2, '2012-05-08 17:04:45', NULL, NULL, 'comment #2', 1, 1);
 INSERT INTO comment VALUES (3, '2012-05-08 17:04:45', NULL, NULL, 'endlich wieder kicken', 79, 2);
+

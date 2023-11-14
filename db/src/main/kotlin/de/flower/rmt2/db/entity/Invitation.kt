@@ -9,7 +9,7 @@ import jakarta.persistence.ManyToOne
 import jakarta.persistence.OneToMany
 import jakarta.persistence.OrderBy
 import jakarta.persistence.Table
-import java.util.*
+import java.time.LocalDateTime
 
 @Entity
 @Table(name = "invitation")
@@ -21,7 +21,7 @@ class Invitation : AbstractBaseEntity() {
     /**
      * Date of response. Might be updated when user changes his status.
      */
-    var date: Date? = null
+    var date: LocalDateTime? = null
 
     @ManyToOne(fetch = FetchType.LAZY)
     var event: Event? = null
@@ -33,6 +33,6 @@ class Invitation : AbstractBaseEntity() {
 
     @OneToMany(mappedBy = "invitation", fetch = FetchType.LAZY)
     @OrderBy("createDate")
-    val comments: List<Comment> = ArrayList<Comment>()
+    val comments: MutableList<Comment> = ArrayList<Comment>()
 
 }
