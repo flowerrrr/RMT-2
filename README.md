@@ -13,7 +13,7 @@ Projekt wurde begonnen, um Erfahrungen mit Kotlin zu sammeln.
 
 ### Nicht eingecheckte Dateien
 
-* `rest/src/main/resources/secrets.properties` (`spring.datasource.password`)
+* `rest/src/main/resources/secrets.properties` (`spring.datasource.password`, `app.jwtSecret`; wird in die Jar gepackt)
 * `db/src/test/resources/secrets-mysql.properties` (für die MySQL-Integrationstests)
 * `docker/.env` (MySQL-Passwörter und `COMPOSE_PROJECT_NAME=das-tool-rest`)
 * `docker/mysql/scripts/*.sql` (Dump der Prod-Datenbank)
@@ -30,7 +30,18 @@ Die Angular-App (Projekt `angular-ui`) greift über `apiUrl` in `src/environment
 
 ## Deployment
 
+### Erstes Deployment nach dem Update auf Spring Boot 4
+
+Die Jar ist nicht mehr direkt ausführbar (kein Launch-Script). Auf dem Server deshalb **vor** dem Deployment
+der neuen Jar die Service-Datei ersetzen (s. Install app as a service):
+
+* `deployment/das-tool-rest.service` nach `/etc/systemd/system` kopieren.
+* `sudo systemctl daemon-reload`
+
 ### Executable Jar bauen
+
+`rest/src/main/resources/secrets.properties` (`spring.datasource.password`, `app.jwtSecret`) wird beim Build
+in die Jar gepackt. Vor dem Bauen prüfen, dass die Datei die **Prod-Werte** enthält.
 
 * `./gradlew :rest:bootJar`
 * `rest/build/libs/das-tool-rest.jar` nach flower.de:/home/oblume/das-tool-rest kopieren.
