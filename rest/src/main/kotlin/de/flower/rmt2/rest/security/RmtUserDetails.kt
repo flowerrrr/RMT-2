@@ -5,7 +5,7 @@ import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.AuthorityUtils
 
 class RmtUserDetails(private val user: User) : org.springframework.security.core.userdetails.User(
-    user.username,
+    user.username!!,
     user.encryptedPassword,
     user.isEnabled,
     true,

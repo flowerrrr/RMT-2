@@ -4,7 +4,7 @@ After=syslog.target
 
 [Service]
 User=oblume
-ExecStart=/home/oblume/das-tool-rest/das-tool-rest.jar
+ExecStart=/usr/lib/jvm/openjdk-21/bin/java -jar /home/oblume/das-tool-rest/das-tool-rest.jar
 WorkingDirectory=/home/oblume/das-tool-rest
 SuccessExitStatus=143
 

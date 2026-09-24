@@ -12,7 +12,6 @@ import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
-import java.util.stream.Collectors
 
 @RestController
 class AuthenticationController(
@@ -28,9 +27,8 @@ class AuthenticationController(
         val jwt: String = jwtService.generateJwtToken(authentication)
 
         val userDetails: UserDetails = authentication.principal as UserDetails
-        val roles: List<String> = userDetails.getAuthorities().stream()
-            .map { item -> item.getAuthority() }
-            .collect(Collectors.toList())
+        val roles: List<String> = userDetails.getAuthorities()
+            .mapNotNull { item -> item.getAuthority() }
 
         return ResponseEntity.ok<JwtResponse>(
             JwtResponse(jwt, userDetails.username, roles)

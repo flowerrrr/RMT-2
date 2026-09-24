@@ -30,7 +30,7 @@ class SecurityConfig {
         http {
             cors { }
             csrf { disable() }
-            authorizeRequests {
+            authorizeHttpRequests {
                 authorize("/favicon.ico", permitAll)
                 authorize("/index.html", permitAll)
                 authorize("/login", permitAll)

@@ -1,6 +1,6 @@
 package de.flower.rmt2.rest.controller
 
-import com.fasterxml.jackson.databind.ObjectMapper
+import tools.jackson.databind.ObjectMapper
 import de.flower.rmt2.core.dto.InvitationDTO
 import de.flower.rmt2.core.dto.UpdateInvitationDTO
 import de.flower.rmt2.db.entity.RSVPStatus
@@ -10,7 +10,7 @@ import org.assertj.core.api.Assertions.within
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
+import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.http.MediaType
@@ -40,13 +40,12 @@ class InvitationsControllerWriteTest(
     fun updateInvitation() {
         // Given
         val invitationId = 4L
-        transactionTemplate.execute<Any> {
+        transactionTemplate.executeWithoutResult {
             val invitation = invitationRepo.findByIdOrNull(invitationId)!!
             assertThat(invitation).isNotNull()
             assertThat(invitation.status).isEqualTo(RSVPStatus.NORESPONSE)
             assertThat(invitation.date).isBefore(LocalDateTime.now())
             assertThat(invitation.comments).isEmpty()
-            null // Return value not used
         }
 
         // When
@@ -61,7 +60,7 @@ class InvitationsControllerWriteTest(
         // Then
         val invitationDTO = objectMapper.readValue(mvcResult.response.contentAsString, InvitationDTO::class.java)
         assertThat(invitationDTO).isNotNull()
-        transactionTemplate.execute<Any> {
+        transactionTemplate.executeWithoutResult {
             val invitation = invitationRepo.findByIdOrNull(invitationId)!!
             // check comment and data of response
             assertThat(invitation.status).isEqualTo(RSVPStatus.DECLINED)
@@ -103,14 +102,13 @@ class InvitationsControllerWriteTest(
     fun updateInvitationAndDeleteComment() {
         // Given
         val invitationId = 4L
-        transactionTemplate.execute<Any> {
+        transactionTemplate.executeWithoutResult {
             val invitation = invitationRepo.findByIdOrNull(invitationId)!!
             assertThat(invitation).isNotNull()
             if (invitation.comments.isEmpty()) {
                 // erzeuge Kommentar
                 updateInvitation()
             }
-            null // Return value not used
         }
 
         // When using null as comment text the comment should not be modified
@@ -124,7 +122,7 @@ class InvitationsControllerWriteTest(
             .andReturn()
         // Then
         var invitationDTO = objectMapper.readValue(mvcResult.response.contentAsString, InvitationDTO::class.java)
-        transactionTemplate.execute<Any> {
+        transactionTemplate.executeWithoutResult {
             val invitation = invitationRepo.findByIdOrNull(invitationId)!!
             assertThat(invitation.comments).isNotEmpty
         }
@@ -140,7 +138,7 @@ class InvitationsControllerWriteTest(
             .andReturn()
         // Then
         invitationDTO = objectMapper.readValue(mvcResult.response.contentAsString, InvitationDTO::class.java)
-        transactionTemplate.execute<Any> {
+        transactionTemplate.executeWithoutResult {
             val invitation = invitationRepo.findByIdOrNull(invitationId)!!
             assertThat(invitation.comments).isEmpty()
         }

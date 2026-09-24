@@ -19,8 +19,8 @@ CREATE TABLE club
     objectStatus int          DEFAULT NULL,
     lat          double       DEFAULT NULL,
     lng          double       DEFAULT NULL,
-    createDate   datetime     DEFAULT NULL,
-    updateDate   datetime     DEFAULT NULL,
+    createDate   TIMESTAMP     DEFAULT NULL,
+    updateDate   TIMESTAMP     DEFAULT NULL,
     PRIMARY KEY (id)
 );
 
@@ -138,8 +138,8 @@ CREATE TABLE player
     team_id      BIGINT             NOT NULL,
     user_id      BIGINT             NOT NULL,
     objectStatus INT      DEFAULT NULL,
-    createDate   DATETIME DEFAULT NULL,
-    updateDate   DATETIME DEFAULT NULL,
+    createDate   TIMESTAMP DEFAULT NULL,
+    updateDate   TIMESTAMP DEFAULT NULL,
     FOREIGN KEY (team_id) REFERENCES team (id),
     FOREIGN KEY (user_id) REFERENCES users (id)
 );

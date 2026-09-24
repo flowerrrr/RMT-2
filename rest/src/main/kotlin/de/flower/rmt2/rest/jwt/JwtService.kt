@@ -3,7 +3,6 @@ package de.flower.rmt2.rest.jwt
 import io.jsonwebtoken.ExpiredJwtException
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.MalformedJwtException
-import io.jsonwebtoken.SignatureAlgorithm
 import io.jsonwebtoken.UnsupportedJwtException
 import io.jsonwebtoken.io.Decoders
 import io.jsonwebtoken.security.Keys
@@ -12,7 +11,7 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.stereotype.Service
-import java.security.Key
+import javax.crypto.SecretKey
 import java.util.*
 
 @Service
@@ -29,29 +28,29 @@ class JwtService {
 
         val oneYear = 1000L * 60 * 60 * 24 * 365 // 1 year in milliseconds
         return Jwts.builder()
-            .setSubject((userPrincipal.getUsername()))
-            .setIssuedAt(Date())
-            .setExpiration(Date((Date()).getTime() + 5 * oneYear))
-            .signWith(key(), SignatureAlgorithm.HS256)
+            .subject(userPrincipal.getUsername())
+            .issuedAt(Date())
+            .expiration(Date((Date()).getTime() + 5 * oneYear))
+            .signWith(key(), Jwts.SIG.HS256)
             .compact();
     }
 
-    fun key(): Key {
+    fun key(): SecretKey {
         return Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
     }
 
     fun getUserNameFromJwtToken(token: String?): String {
         return Jwts.parser()
-            .setSigningKey(key()).build()
-            .parseClaimsJws(token)
-            .getBody()
+            .verifyWith(key()).build()
+            .parseSignedClaims(token)
+            .getPayload()
             .getSubject()
     }
 
     fun validateJwtToken(authToken: String?): Boolean {
         try {
             Jwts.parser()
-                .setSigningKey(key())
+                .verifyWith(key())
                 .build()
                 .parse(authToken)
             return true

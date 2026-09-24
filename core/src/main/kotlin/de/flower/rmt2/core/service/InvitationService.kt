@@ -26,7 +26,7 @@ class InvitationService(
     }
 
     fun updateInvitation(updateInvitationDTO: UpdateInvitationDTO): InvitationDTO {
-        val id = updateInvitationDTO.id
+        val id = updateInvitationDTO.id!!
         val username = getUsername()
         val user = userRepo.findByEmail(username)!!
         val invitation = invitationRepo.findByIdOrNull(id)

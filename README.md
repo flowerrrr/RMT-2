@@ -24,7 +24,6 @@ Projekt wurde begonnen, um Erfahrungen mit Kotlin zu sammeln.
 
 s. https://docs.spring.io/spring-boot/docs/current/reference/html/deployment.html#deployment.installing.nix-services.system-d
 
-* deployment/das-tool-rest.conf ins Verzeichnis /oblume/das-tool-rest kopieren.
 * deployment/das-tool-rest.service ins Verzeichnis /etc/systemd/system kopieren.
 * systemctl daemon-reload
 * systemctl start das-tool-rest

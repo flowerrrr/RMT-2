@@ -1,11 +1,13 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-//	id("org.springframework.boot") version "3.1.3"
-//	id("io.spring.dependency-management") version "1.1.3"
-    kotlin("jvm") version "1.8.22"
-//	kotlin("plugin.spring") version "1.8.22"
-//	kotlin("plugin.jpa") version "1.8.22"
+    id("org.springframework.boot") version "4.1.1" apply false
+    id("io.spring.dependency-management") version "1.1.7" apply false
+    kotlin("jvm") version "2.4.20"
+    kotlin("plugin.spring") version "2.4.20" apply false
+    kotlin("plugin.jpa") version "2.4.20" apply false
+    kotlin("plugin.allopen") version "2.4.20" apply false
 }
 
 group = "de.flower"
@@ -28,9 +30,9 @@ allprojects {
     }
 
     tasks.withType<KotlinCompile> {
-        kotlinOptions {
-            freeCompilerArgs += "-Xjsr305=strict"
-            jvmTarget = "17"
+        compilerOptions {
+            freeCompilerArgs.add("-Xjsr305=strict")
+            jvmTarget.set(JvmTarget.JVM_17)
         }
     }
 

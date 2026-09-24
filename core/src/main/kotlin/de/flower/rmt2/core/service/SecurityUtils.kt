@@ -8,6 +8,6 @@ class SecurityUtils {
 fun getUsername(): String {
     val context = SecurityContextHolder.getContext()
     val authentication = context.authentication
-    val username = authentication.name
+    val username = authentication!!.name
     return username
 }
