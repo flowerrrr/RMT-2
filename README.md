@@ -4,48 +4,66 @@ Minimale REST API für das-tool.
 
 Projekt wurde begonnen, um Erfahrungen mit Kotlin zu sammeln.
 
+## Lokale Entwicklung
+
+### JDK
+
+* Gradle verwendet das JDK aus `gradle.properties` (`org.gradle.java.home`, aktuell jdk-20.0.2).
+* Kompiliert wird für Java 17, auf dem Server läuft JDK 21.
+
+### Nicht eingecheckte Dateien
+
+* `rest/src/main/resources/secrets.properties` (`spring.datasource.password`)
+* `db/src/test/resources/secrets-mysql.properties` (für die MySQL-Integrationstests)
+* `docker/.env` (MySQL-Passwörter und `COMPOSE_PROJECT_NAME=das-tool-rest`)
+* `docker/mysql/scripts/*.sql` (Dump der Prod-Datenbank)
+
+### Starten
+
+1. MySQL in Docker starten: In Docker Desktop den Container `mysql-1` in der Gruppe `das-tool-rest` starten
+   (bzw. `docker start das-tool-rest-mysql-1`).
+   Neu anlegen: `docker compose up -d` im Verzeichnis `docker/` (Image `mysql-no-volume`, s. `docker/mysql-no-volume/Readme.MD`).
+2. Backend starten: `./gradlew :rest:bootRun`
+3. API ist erreichbar unter http://localhost:8090/das-tool-rest (Test: http://localhost:8090/das-tool-rest/index.html).
+
+Die Angular-App (Projekt `angular-ui`) greift über `apiUrl` in `src/environments/environment.ts` auf das Backend zu.
+
 ## Deployment
-
-
-### Install JDK
-
-* JDK 21 installieren und JAVA_HOME_21 setzen.
 
 ### Executable Jar bauen
 
-* gradle assemble
-* das-tool-rest.jar nach flower.de:/home/oblume/das-tool-rest kopieren.
-* chmod a+rx das-tool-rest.jar
-* sudo systemctl restart das-tool-rest
-* sudo less /var/log/das-tool-rest/das-tool-rest.log
-
+* `./gradlew :rest:bootJar`
+* `rest/build/libs/das-tool-rest.jar` nach flower.de:/home/oblume/das-tool-rest kopieren.
+* `sudo systemctl restart das-tool-rest`
+* `sudo less /var/log/das-tool-rest/das-tool-rest.log`
 
 ### Install app as a service
 
-s. https://docs.spring.io/spring-boot/docs/current/reference/html/deployment.html#deployment.installing.nix-services.system-d
+s. https://docs.spring.io/spring-boot/reference/deployment/installing.html
 
-* deployment/das-tool-rest.service ins Verzeichnis /etc/systemd/system kopieren.
-* systemctl daemon-reload
-* systemctl start das-tool-rest
-* systemctl enable das-tool-rest.service
+* `deployment/das-tool-rest.service` ins Verzeichnis `/etc/systemd/system` kopieren.
+* `sudo systemctl daemon-reload`
+* `sudo systemctl start das-tool-rest`
+* `sudo systemctl enable das-tool-rest.service`
 
+Seit Spring Boot 4 gibt es kein eingebettetes Launch-Script mehr, die Jar wird im Service mit
+`/usr/lib/jvm/openjdk-21/bin/java -jar` gestartet. Nach Änderungen an der Service-Datei `daemon-reload` nicht vergessen.
 
 #### Running behind Apache
 
-  a2enmod proxy
-  a2enmod proxy_http
+    a2enmod proxy
+    a2enmod proxy_http
 
-- Reverse-Proxy-Config: /etc/apache2/sites-available/ flower.de-le-ssl.conf
+Reverse-Proxy-Config: `/etc/apache2/sites-available/flower.de-le-ssl.conf`
 
-  # Proxy configuration for /das-tool-rest path
-  ProxyPass "/das-tool-rest" "http://localhost:8090/das-tool-rest"
-  ProxyPassReverse "/das-tool-rest" "http://localhost:8090/das-tool-rest"
-
+    # Proxy configuration for /das-tool-rest path
+    ProxyPass "/das-tool-rest" "http://localhost:8090/das-tool-rest"
+    ProxyPassReverse "/das-tool-rest" "http://localhost:8090/das-tool-rest"
 
 ### Logging
 
-* /var/log/das-tool-rest.log (wird von systemd geschrieben)
-* /var/log/das-tool-rest/das-tool-rest.log (application log, konfiguriert in logback.xml)
+* `/var/log/das-tool-rest/das-tool-rest.log` (application log, konfiguriert in logback.xml)
+* `journalctl -u das-tool-rest` (stdout/stderr des Service)
 
 ### Monitoring
 
@@ -61,22 +79,24 @@ s. https://docs.spring.io/spring-boot/docs/current/reference/html/deployment.htm
 
 ## Firewall
 
-s. Readme.Md im Projekt 'rmt.'
+s. Readme.Md im Projekt 'rmt'.
 
 ## SSL-Certificate
 
 Wird von Apache bereitgestellt.
 
-
 ## Testing
 
-Unit-Tests laufen mit einer H2, die über SQL-Skripte initialisiert wird.
+`./gradlew test`
+
+Unit-Tests laufen mit einer H2, die über SQL-Skripte (`schema.sql`, `data.sql`) initialisiert wird.
 
 Insgesamt ist die Testabdeckung noch sehr gering.
 
 ## Integration testing
 
-Die App kann mit einer MySQL, die in Docker läuft, getestet werden.
+Die Repository-Tests in `db` (Basisklasse `AbstractMysqlRepoTest`, Profil `mysql`) laufen gegen die MySQL im
+Docker-Container (s. Lokale Entwicklung).
 
 ## Issue Tracking
 
